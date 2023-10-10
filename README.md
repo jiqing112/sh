@@ -26,6 +26,7 @@ CentOS 删除 IP 脚本：
 Debian 添加 IP 脚本：  
 
 在 Debian 系统中添加一个新的 IP 地址刀interface文件。  
+首先备份/etc/network/interfaces文件到同名.bak文件
 用户需要输入要添加的 IP 地址和子网掩码。  
 脚本会在 /etc/network/interfaces 文件中添加一个新的配置段，配置【虚拟网卡名】、【指定的 IP 】和【子网掩码】。  
 最后脚本会重启网络应用。  
