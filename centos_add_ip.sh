@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 列举当前网卡设备
+# 遍历输出当前网卡设备
 echo "可用的网卡设备："
 interfaces=($(ip link show | awk -F': ' '{print $2}' | awk -F'@' '{print $1}'))
 for i in "${!interfaces[@]}"; do
