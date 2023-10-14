@@ -1,17 +1,18 @@
 #!/bin/bash
 
-sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+ cp /etc/apt/sources.list /etc/apt/sources.list.bak
 
 # Generate a new sources.list file with network sources
-sudo echo "deb http://deb.debian.org/debian/ $(lsb_release -cs) main" > /etc/apt/sources.list
-sudo echo "deb-src http://deb.debian.org/debian/ $(lsb_release -cs) main" >> /etc/apt/sources.list
-sudo echo "deb http://deb.debian.org/debian/ $(lsb_release -cs)-updates main" >> /etc/apt/sources.list
-sudo echo "deb-src http://deb.debian.org/debian/ $(lsb_release -cs)-updates main" >> /etc/apt/sources.list
-sudo echo "deb http://security.debian.org/debian-security/ $(lsb_release -cs)/updates main" >> /etc/apt/sources.list
-sudo echo "deb-src http://security.debian.org/debian-security/ $(lsb_release -cs)/updates main" >> /etc/apt/sources.list
+ echo "deb http://deb.debian.org/debian/ $(lsb_release -cs) main" > /etc/apt/sources.list
+ echo "deb-src http://deb.debian.org/debian/ $(lsb_release -cs) main" >> /etc/apt/sources.list
+ echo "deb http://deb.debian.org/debian/ $(lsb_release -cs)-updates main" >> /etc/apt/sources.list
+ echo "deb-src http://deb.debian.org/debian/ $(lsb_release -cs)-updates main" >> /etc/apt/sources.list
+ echo "deb http://security.debian.org/debian-security/ $(lsb_release -cs)/updates main" >> /etc/apt/sources.list
+ echo "deb-src http://security.debian.org/debian-security/ $(lsb_release -cs)/updates main" >> /etc/apt/sources.list
 
 # Update the package lists
-sudo apt update
+ apt update -y
+ apt install sudo -y
 
 # Print the updated sources.list file
 
