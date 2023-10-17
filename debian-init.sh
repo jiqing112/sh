@@ -28,7 +28,10 @@ fi
 cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
 
 # Modify sshd_config to allow remote root login
+sed -i 's/#Port 22/Port 22/' /etc/ssh/sshd_config
 sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+sed -i 's/#ClientAliveInterval 0/ClientAliveInterval 60/' /etc/ssh/sshd_config
+sed -i 's/#ClientAliveCountMax 3/ClientAliveCountMax 3/' /etc/ssh/sshd_config
 
 # Reload the SSH service
 systemctl reload sshd
