@@ -24,12 +24,28 @@ selected_interface=${interfaces[$selected_interface_index]}
 # 提示用户输入IP地址
 read -p "请输入要配置的IP地址: " ip_address
 
-# 执行配置IP地址命令
-sudo ip addr add $ip_address dev $selected_interface
+# 检查输入的IP地址是否符合规则
+if ! [[ "$ip_address" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    echo "无效的IP地址，请重新运行脚本并输入正确的IP地址。"
+    exit 1
+fi
+
+ip addr add $ip_address/24 dev $selected_interface
+
+# 拼接命令
+command="ip addr add $ip_address/24 dev $selected_interface"
+
+# 将命令写入文件
+echo "#!/bin/bash" > /etc/network/add_extra_ip.sh
+echo "$command" >> /etc/network/add_extra_ip.sh
+chmod +x /etc/network/add_extra_ip.sh
+
+# 设置开机启动
+echo "@reboot root /etc/network/add_extra_ip.sh" | tee /etc/cron.d/add_extra_ip
 
 # 检查命令执行结果
 if [ $? -eq 0 ]; then
-    echo "IP地址配置成功。"
+    echo "IP地址配置成功，并已将命令写入 /etc/network/add_extra_ip.sh 文件并设置为开机启动。"
 else
     echo "IP地址配置失败。"
 fi
