@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# 这个脚本适用于debian10 、debian12 
+# 这个脚本适用于debian10 、debian12 ，
+# 本质上是通过ip addr ip 命令配置ip，然后将命令写入到一个sh脚本，设置为开机自启
 # 获取所有网卡名称
 interfaces=($(ip link show | awk -F': ' '/^[0-9]+:/ {print $2}'))
 
