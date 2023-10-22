@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# 这个配置IP的脚本可能不适用于debian10 ，请谨慎再debian10上使用
+
 # 备份 /etc/network/interfaces 文件
 cp /etc/network/interfaces /etc/network/interfaces.bak
 
