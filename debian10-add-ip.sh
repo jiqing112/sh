@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# 这个脚本适用于debian10 、debian12 
 # 获取所有网卡名称
 interfaces=($(ip link show | awk -F': ' '/^[0-9]+:/ {print $2}'))
 
