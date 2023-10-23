@@ -3,6 +3,7 @@
 # 这个脚本适用于debian10 、debian12 ，
 # 本质上是通过ip addr ip 命令配置ip，然后将命令写入到一个sh脚本，设置为开机自启
 # 所以适用于debian10 、debian12 ，centos 7、 8 、9
+
 #!/bin/bash
 
 interfaces=($(ip link show | awk -F': ' '/^[0-9]+:/ {print $2}'))
@@ -45,9 +46,13 @@ for ip_address in "${ip_addresses[@]}"; do
     command+="ip addr add $ip_address/24 dev $selected_interface\n"
 done
 
-echo "#!/bin/bash" > /etc/network/add_extra_ip.sh
-echo -e "$command" >> /etc/network/add_extra_ip.sh
-chmod +x /etc/network/add_extra_ip.sh
+if [ -f "/etc/network/add_extra_ip.sh" ]; then
+    echo -e "$command" >> /etc/network/add_extra_ip.sh
+else
+    echo "#!/bin/bash" > /etc/network/add_extra_ip.sh
+    echo -e "$command" >> /etc/network/add_extra_ip.sh
+    chmod +x /etc/network/add_extra_ip.sh
+fi
 
 echo "[Unit]
 Description=Add Extra IP Addresses
