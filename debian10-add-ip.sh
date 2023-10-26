@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 这个脚本适用于支持systemd和ip命令的发行版，
-# 脚本本质上是通过ip addr ip add命令配置ip，然后将ip addr add命令写入进一个sh脚本，通过systemd设置为开机自启
+# 脚本本质上是通过ip addr ip add命令配置ip，然后将ip addr add命令写入进一个sh脚本，通过systemd设置sh脚本开机自启一次
 # 所以适用于centos 7、8、9 或者 ubuntu 、debian10 、debian12 
 #!/bin/bash
 
